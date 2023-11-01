@@ -1,6 +1,6 @@
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import { FaShoppingCart, FaUser } from 'react-icons/fa'
-
+import logo from '../assets/logo.png'
 
 
 function Header() {
@@ -8,7 +8,10 @@ function Header() {
     <header>
         <Navbar bg="dark" variant='dark' expand="md" collapseOnSelect>
             <Container>
-                <Navbar.Brand href='/'>TheShop</Navbar.Brand>
+                <Navbar.Brand href='/'>
+                    <img src={logo} alt='TheStore'/>
+                    TheShop
+                    </Navbar.Brand>
                 <Navbar.Toggle aria-controls='basic-navbar-nav' />
                 <Navbar.Collapse id='basic-aria-nav'>
                     <Nav className='ms-auto'>
