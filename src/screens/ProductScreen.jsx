@@ -3,6 +3,7 @@ import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import Rating from "../components/Rating"
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice"
+import Loader from "../components/Loader"
 
 function ProductScreen() {
     
@@ -19,7 +20,7 @@ function ProductScreen() {
             Go Back
         </Link>
 
-        { isLoading ? (<h2>Loading...</h2>) : error ? (
+        { isLoading ? (<Loader />) : error ? (
             <div>{error?.data?.messages || error?.error}</div>
         ) : (
         <Row>
