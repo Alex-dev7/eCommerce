@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import Rating from "../components/Rating"
 import { useGetProductDetailsQuery } from "../slices/productsApiSlice"
 import Loader from "../components/Loader"
+import Message from "../components/Message"
 
 function ProductScreen() {
     
@@ -21,7 +22,7 @@ function ProductScreen() {
         </Link>
 
         { isLoading ? (<Loader />) : error ? (
-            <div>{error?.data?.messages || error?.error}</div>
+              <Message variant='danger'>{ error?.data?.message || error.error }</Message>
         ) : (
         <Row>
         <Col md={5}>
