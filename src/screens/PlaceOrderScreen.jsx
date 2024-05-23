@@ -13,7 +13,7 @@ import { clearCartItems } from "../slices/cartSlice"
 
 function PlaceOrderScreen() {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+   
     const cart = useSelector((state) => state.cart)
 
     const [createOrder, { isLoading, error}] = useCreateOrderMutation()
@@ -27,10 +27,13 @@ function PlaceOrderScreen() {
         }
     }, [cart.paymentMethod, cart.shippingAddress.address, navigate])
 
+    const dispatch = useDispatch()
     const placeOrderHandler = async () => {
+        console.log(cart)
+    
         try {
             const res = await createOrder({
-                orderItems: cart.orderItems,
+                orderItems: cart.cartItems,
                 shippingAddress: cart.shippingAddress,
                 paymentMethod: cart.paymentMethod,
                 itemsPrice: cart.itemsPrice,
@@ -38,7 +41,7 @@ function PlaceOrderScreen() {
                 taxPrice: cart.taxPrice,
                 totalPrice: cart.totalPrice,
             }).unwrap()
-
+           
             dispatch(clearCartItems())
 
             navigate(`/order/${res._id}`)
@@ -146,7 +149,7 @@ function PlaceOrderScreen() {
                                 <Button 
                                     type="button"
                                     className="btn-block"
-                                    disabled={cart.cartItems.length === 0}
+                                    disabled={cart.cartItems === 0}
                                     onClick={placeOrderHandler}
                                     >
                                         Place Order
